@@ -52,41 +52,55 @@ export default function Calculator() {
 
   return (
     <div className="Calc">
-      <span>{screen}</span>
-      <div className="Calc-Row">
-        <div onClick={handleNumClick} className="Calc-Column">
-          <div className="Calc-Row">
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
-          </div>
-          <div className="Calc-Row">
-            <a>4</a>
-            <a>5</a>
-            <a>6</a>
-          </div>
-          <div className="Calc-Row">
-            <a>7</a>
-            <a>8</a>
-            <a>9</a>
-          </div>
-          <div className="Calc-Row">
-            <a>0</a>
-          </div>
+      <span className="Calc_screen">{screen}</span>
+      <div className="Calc_pad">
+        <div className="Calc_pad_numbers">
+          <a className="btn" onClick={handleNumClick}>
+            7
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            8
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            9
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            4
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            5
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            6
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            1
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            2
+          </a>
+          <a className="btn" onClick={handleNumClick}>
+            3
+          </a>
         </div>
-        <div className="Calc-Column">
-          <div className="Calc-Row">
-            <a onClick={handleAcClick}>AC</a>
-          </div>
-          <div className="Calc-Row">
-            <a onClick={handleOpClick}>+</a>
-          </div>
-          <div className="Calc-Row">
-            <a onClick={handleOpClick}>-</a>
-          </div>
-          <div className="Calc-Row">
-            <a onClick={applyEquals}>=</a>
-          </div>
+        <div className="Calc_pad_zero">
+          <div className="empty"></div>
+          <a className="btn btn-zero">0</a>
+          <div className="empty"></div>
+        </div>
+        <div className="Calc_pad_ops">
+          <a className="btn" onClick={handleAcClick}>
+            AC
+          </a>
+          <a className="btn" onClick={handleOpClick}>
+            +
+          </a>
+          <a className="btn" onClick={handleOpClick}>
+            -
+          </a>
+          <a className="btn btn-equals" onClick={applyEquals}>
+            =
+          </a>
         </div>
       </div>
     </div>
