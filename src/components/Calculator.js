@@ -3,6 +3,7 @@ import "./Calculator.css";
 
 export default function Calculator() {
   const [value, setValue] = useState(0);
+  const [aggregate, setAggregate] = useState(0);
   const changeValue = evt => setValue(evt.target.value);
 
   function handleNumClick(e) {
@@ -12,6 +13,12 @@ export default function Calculator() {
     }
   }
 
+  function handleAcClick() {
+    setValue(0);
+    setAggregate(0);
+  }
+
+  console.log(aggregate);
   return (
     <div className="Calc">
       <input value={value} onChange={changeValue} />
@@ -38,7 +45,7 @@ export default function Calculator() {
         </div>
         <div className="Calc-Column">
           <div className="Calc-Row">
-            <a>AC</a>
+            <a onClick={handleAcClick}>AC</a>
           </div>
           <div className="Calc-Row">
             <a>+</a>
