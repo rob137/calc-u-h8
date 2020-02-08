@@ -3,7 +3,8 @@ import "./Calculator.css";
 
 export default function Calculator() {
   const [value, setValue] = useState(0);
-  const [aggregate, setAggregate] = useState(0);
+  const [acc, setAcc] = useState(0);
+  const [operator, setOperator] = useState("");
   const changeValue = evt => setValue(evt.target.value);
 
   function handleNumClick(e) {
@@ -15,10 +16,19 @@ export default function Calculator() {
 
   function handleAcClick() {
     setValue(0);
-    setAggregate(0);
+    setAcc(0);
   }
 
-  console.log(aggregate);
+  function handleEqClick() {
+    if (operator === "+") {
+      setAcc(acc + value);
+    } else if (operator === "-") {
+      setAcc(acc - value);
+    }
+    setOperator("");
+  }
+
+  console.log(acc, operator);
   return (
     <div className="Calc">
       <input value={value} onChange={changeValue} />
@@ -48,13 +58,13 @@ export default function Calculator() {
             <a onClick={handleAcClick}>AC</a>
           </div>
           <div className="Calc-Row">
-            <a>+</a>
+            <a onClick={() => setOperator("+")}>+</a>
           </div>
           <div className="Calc-Row">
-            <a>-</a>
+            <a onClick={() => setOperator("-")}>-</a>
           </div>
           <div className="Calc-Row">
-            <a>=</a>
+            <a onClick={handleEqClick}>=</a>
           </div>
         </div>
       </div>
