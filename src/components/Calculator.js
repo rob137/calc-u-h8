@@ -10,11 +10,11 @@ export default function Calculator() {
   function handleNumClick(e) {
     const isNum = e.target.tagName === "A";
     const input = e.target.innerText;
-    const isNewEntry = isNum && operator === "" && value === "" && acc === "";
+    const isNewEntry = isNum && operator === "" && screen === "0";
     if (isNewEntry) {
       setAcc(input);
       setScreen(input);
-    } else if (isNum && operator === "" && value === "" && acc !== "") {
+    } else if (isNum && operator === "" && screen !== "") {
       setAcc(acc + input);
       setScreen(acc + input);
     } else if (isNum && operator !== "" && value === "") {
@@ -42,7 +42,6 @@ export default function Calculator() {
     }
     setScreen(newAcc);
     setOperator("");
-    setValue(newAcc);
     setAcc(newAcc);
   }
 
