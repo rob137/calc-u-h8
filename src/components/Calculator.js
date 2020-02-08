@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import "./Calculator.css";
 
 export default function Calculator() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(0);
   const changeValue = evt => setValue(evt.target.value);
+
+  function handleNumClick(e) {
+    if (e.target.tagName === "A") {
+      const num = e.target.innerText;
+      setValue(Number(num));
+    }
+  }
+
   return (
     <div className="Calc">
       <input value={value} onChange={changeValue} />
       <div className="Calc-Row">
-        <div className="Calc-Column">
+        <div onClick={handleNumClick} className="Calc-Column">
           <div className="Calc-Row">
             <a>1</a>
             <a>2</a>
