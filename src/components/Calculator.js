@@ -2,36 +2,64 @@ import React, { useState } from "react";
 import "./Calculator.css";
 
 export default function Calculator() {
-  const [value, setValue] = useState(0);
-  const [acc, setAcc] = useState(0);
+  const [screen, setScreen] = useState("");
+  const [value, setValue] = useState("");
+  const [acc, setAcc] = useState("");
   const [operator, setOperator] = useState("");
-  const changeValue = evt => setValue(evt.target.value);
 
   function handleNumClick(e) {
-    if (e.target.tagName === "A") {
-      const num = e.target.innerText;
-      setValue(Number(num));
+    const isNum = e.target.tagName === "A";
+    const input = e.target.innerText;
+    const isNewEntry = isNum && operator === "" && value === "" && acc === "";
+    if (isNewEntry) {
+      setAcc(input);
+      setScreen(input);
+    } else if (isNum && operator === "" && value === "" && acc !== "") {
+      setAcc(acc + input);
+      setScreen(acc + input);
+    } else if (isNum && operator !== "" && value === "") {
+      setValue(input);
+      setScreen(input);
+    } else if (isNum && operator !== "" && value !== "") {
+      setValue(value + input);
+      setScreen(value + input);
     }
   }
 
   function handleAcClick() {
-    setValue(0);
-    setAcc(0);
-  }
-
-  function handleEqClick() {
-    if (operator === "+") {
-      setAcc(acc + value);
-    } else if (operator === "-") {
-      setAcc(acc - value);
-    }
+    setValue("");
+    setScreen("");
+    setAcc("");
     setOperator("");
   }
 
-  console.log(acc, operator);
+  function handleEqClick() {
+    let newAcc = acc;
+    if (operator === "+") {
+      newAcc = String(Number(acc) + Number(value));
+    } else if (operator === "-") {
+      newAcc = String(Number(acc) - Number(value));
+    }
+    setScreen(newAcc);
+    setOperator("");
+    setValue(newAcc);
+    setAcc(newAcc);
+  }
+
+  function handleAddClick() {
+    setOperator("+");
+    setValue("");
+  }
+
+  function handleMinusClick() {
+    setOperator("-");
+    setValue("");
+  }
+
+  console.log(acc, operator, value);
   return (
     <div className="Calc">
-      <input value={value} onChange={changeValue} />
+      <span>{screen}</span>
       <div className="Calc-Row">
         <div onClick={handleNumClick} className="Calc-Column">
           <div className="Calc-Row">
@@ -58,10 +86,10 @@ export default function Calculator() {
             <a onClick={handleAcClick}>AC</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={() => setOperator("+")}>+</a>
+            <a onClick={handleAddClick}>+</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={() => setOperator("-")}>-</a>
+            <a onClick={handleMinusClick}>-</a>
           </div>
           <div className="Calc-Row">
             <a onClick={handleEqClick}>=</a>
