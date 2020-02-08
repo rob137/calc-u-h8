@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as classnames from "classnames";
 import "./Calculator.css";
 
@@ -8,26 +8,55 @@ export default function Calculator() {
   const [acc, setAcc] = useState("");
   const [operator, setOperator] = useState("");
   const [faded, setFaded] = useState(false);
+  const [lastKey, setLastKey] = useState("");
 
-  function handleNumClick(e) {
-    const input = e.target.innerText;
-    const isNewEntry = operator === "" && screen === "0";
-    if (isNewEntry) {
+  function handleKeyPress(e) {
+    const numKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const eqKeys = ["=", "Enter", " "];
+    const opKeys = ["+", "-"];
+    const acKeys = ["Delete", "Backspace"];
+    const acceptedKeys = [...numKeys, ...eqKeys, ...opKeys, ...acKeys];
+    if (acceptedKeys.includes(e.key)) setLastKey(e.key);
+    if (numKeys.includes(e.key)) {
+      handleNumInput(e.key);
+    } else if (opKeys.includes(e.key)) {
+      handleOpInput();
+    } else if (eqKeys.includes(e.key)) {
+      applyEquals();
+    } else if (acKeys.includes(e.key)) {
+      clearAll();
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [lastKey]);
+
+  function handleNumInput(input) {
+    // When user makes first keystroke at start of new sum
+    const isBrandNew = operator === "" && screen === "0" && acc === "";
+    if (isBrandNew) {
       setAcc(input);
       setScreen(input);
+      // New entry, but not first digit entered
     } else if (operator === "" && screen !== "") {
       setAcc(acc + input);
       setScreen(acc + input);
+      // Not a new entry, but first digit entered
     } else if (operator !== "" && value === "") {
       setValue(input);
       setScreen(input);
+      // Not a new entry, not first digit entered
     } else if (operator !== "" && value !== "") {
       setValue(value + input);
       setScreen(value + input);
     }
   }
 
-  function handleAcClick() {
+  function clearAll() {
     setValue("");
     setScreen("0");
     setAcc("");
@@ -46,8 +75,8 @@ export default function Calculator() {
     setAcc(newAcc);
   }
 
-  function handleOpClick(e) {
-    setOperator(e.target.innerText);
+  function handleOpInput(input) {
+    setOperator(input);
     setValue("");
   }
 
@@ -73,7 +102,7 @@ export default function Calculator() {
               className="btn"
               title={val}
               key={key}
-              onClick={handleNumClick}
+              onClick={e => handleNumInput(e.target.innerText)}
             >
               {val}
             </button>
@@ -85,13 +114,19 @@ export default function Calculator() {
           <div className="empty"></div>
         </div>
         <div className="Calc_pad_ops">
-          <button className="btn btn-ops btn-ac" onClick={handleAcClick}>
+          <button className="btn btn-ops btn-ac" onClick={clearAll}>
             AC
           </button>
-          <button className="btn btn-ops" onClick={handleOpClick}>
+          <button
+            className="btn btn-ops"
+            onClick={e => handleOpInput(e.target.innerText)}
+          >
             +
           </button>
-          <button className="btn btn-ops" onClick={handleOpClick}>
+          <button
+            className="btn btn-ops"
+            onClick={e => handleOpInput(e.target.innerText)}
+          >
             -
           </button>
           <button className="btn btn-equals" onClick={applyEquals}>
