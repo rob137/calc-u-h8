@@ -28,6 +28,7 @@
 }
 
 .Calc_top_header h1 {
+  color: #e8e8e8;
   margin: 0;
   font-size: 26px;
 }
@@ -37,9 +38,9 @@
   border-radius: 4px;
   height: 80px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  padding: 10px 5px;
+  padding: 10px;
   margin-top: 15px;
   background-color: #9eaa74;
   color: #151515;
@@ -51,8 +52,8 @@
   height: 100%;
   display: grid;
   grid-template:
-    "nums ops" 80%
-    "zero ops"
+    "nums ops" 3fr
+    "zero ops" 1fr
     / 3fr 1fr;
 }
 
@@ -65,11 +66,6 @@
 .Calc_pad_zero {
   grid-area: zero;
   display: flex;
-}
-
-.btn-zero,
-.empty {
-  flex: 1;
 }
 
 .Calc_pad_ops {
@@ -85,23 +81,40 @@
   cursor: pointer;
   user-select: none;
   flex: 1;
+  font-size: 20px;
 }
 
 .btn:hover {
   transition: background 0.2s;
-  background: radial-gradient(#454c5a, #363a42, #363a42);
+  background: radial-gradient(#474a52, #363a42, #363a42);
 }
 
 .btn-zero {
   grid-area: zero;
-  border-radius: 0 0 0 9px;
+}
+
+.btn-zero,
+.empty {
+  flex: 1;
+}
+
+.btn-ops {
+  background-color: #3a4763;
+}
+
+.btn-ops:hover {
+  background: radial-gradient(#4c5b7d, #3a4763, #3a4763);
+}
+
+.btn-ac {
+  border-radius: 9px 9px 0 0;
 }
 
 .btn-equals {
-  border-radius: 0 0 9px 0;
-  background-color: #a23c00 !important;
+  border-radius: 0 0 9px 9px;
+  background-color: #a23c00;
 }
 
 .btn-equals:hover {
-  background-color: #c54900 !important;
+  background: #c54900;
 }

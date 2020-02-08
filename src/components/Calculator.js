@@ -95,13 +95,13 @@ export default function Calculator() {
           <div className="empty"></div>
         </div>
         <div className="Calc_pad_ops">
-          <a className="btn" onClick={handleAcClick}>
+          <a className="btn btn-ops btn-ac" onClick={handleAcClick}>
             AC
           </a>
-          <a className="btn" onClick={handleOpClick}>
+          <a className="btn btn-ops" onClick={handleOpClick}>
             +
           </a>
-          <a className="btn" onClick={handleOpClick}>
+          <a className="btn btn-ops" onClick={handleOpClick}>
             -
           </a>
           <a className="btn btn-equals" onClick={applyEquals}>
