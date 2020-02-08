@@ -10,19 +10,18 @@ export default function Calculator() {
   const [faded, setFaded] = useState(false);
 
   function handleNumClick(e) {
-    const isNum = e.target.tagName === "A";
     const input = e.target.innerText;
-    const isNewEntry = isNum && operator === "" && screen === "0";
+    const isNewEntry = operator === "" && screen === "0";
     if (isNewEntry) {
       setAcc(input);
       setScreen(input);
-    } else if (isNum && operator === "" && screen !== "") {
+    } else if (operator === "" && screen !== "") {
       setAcc(acc + input);
       setScreen(acc + input);
-    } else if (isNum && operator !== "" && value === "") {
+    } else if (operator !== "" && value === "") {
       setValue(input);
       setScreen(input);
-    } else if (isNum && operator !== "" && value !== "") {
+    } else if (operator !== "" && value !== "") {
       setValue(value + input);
       setScreen(value + input);
     }
@@ -70,29 +69,34 @@ export default function Calculator() {
       <div className="Calc_pad">
         <div className="Calc_pad_nums">
           {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((val, key) => (
-            <a className="btn" key={key} onClick={handleNumClick}>
+            <button
+              className="btn"
+              title={val}
+              key={key}
+              onClick={handleNumClick}
+            >
               {val}
-            </a>
+            </button>
           ))}
         </div>
         <div className="Calc_pad_zero">
           <div className="empty"></div>
-          <a className="btn btn-zero">0</a>
+          <button className="btn btn-zero">0</button>
           <div className="empty"></div>
         </div>
         <div className="Calc_pad_ops">
-          <a className="btn btn-ops btn-ac" onClick={handleAcClick}>
+          <button className="btn btn-ops btn-ac" onClick={handleAcClick}>
             AC
-          </a>
-          <a className="btn btn-ops" onClick={handleOpClick}>
+          </button>
+          <button className="btn btn-ops" onClick={handleOpClick}>
             +
-          </a>
-          <a className="btn btn-ops" onClick={handleOpClick}>
+          </button>
+          <button className="btn btn-ops" onClick={handleOpClick}>
             -
-          </a>
-          <a className="btn btn-equals" onClick={applyEquals}>
+          </button>
+          <button className="btn btn-equals" onClick={applyEquals}>
             =
-          </a>
+          </button>
         </div>
       </div>
     </div>

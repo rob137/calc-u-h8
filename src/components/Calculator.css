@@ -92,6 +92,9 @@
   user-select: none;
   flex: 1;
   font-size: 20px;
+  border: none;
+  background: none;
+  color: white;
 }
 
 .btn:hover {
