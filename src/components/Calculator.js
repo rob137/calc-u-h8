@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as classnames from "classnames";
 import "./Calculator.css";
 
 export default function Calculator() {
@@ -6,6 +7,7 @@ export default function Calculator() {
   const [value, setValue] = useState("");
   const [acc, setAcc] = useState("");
   const [operator, setOperator] = useState("");
+  const [faded, setFaded] = useState(false);
 
   function handleNumClick(e) {
     const isNum = e.target.tagName === "A";
@@ -53,12 +55,18 @@ export default function Calculator() {
   return (
     <div className="Calc">
       <div className="Calc_top">
-        <div className="Calc_top_solar"></div>
+        <div
+          className="Calc_top_solar"
+          onMouseEnter={() => setFaded(true)}
+          onMouseLeave={() => setFaded(false)}
+        ></div>
         <header className="Calc_top_header">
           <h1>Calc-u-h8</h1>
         </header>
       </div>
-      <span className="Calc_screen">{screen}</span>
+      <span className={classnames("Calc_screen", faded && "Calc_screen-faded")}>
+        {screen}
+      </span>
       <div className="Calc_pad">
         <div className="Calc_pad_numbers">
           <a className="btn" onClick={handleNumClick}>

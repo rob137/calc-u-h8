@@ -27,6 +27,11 @@
   background-color: #4d4344;
 }
 
+.Calc_top_header {
+  display: flex;
+  align-items: center;
+}
+
 .Calc_top_header h1 {
   color: #e8e8e8;
   margin: 0;
@@ -45,6 +50,11 @@
   background-color: #9eaa74;
   color: #151515;
   margin-bottom: 20px;
+  transition: color 1s;
+}
+
+.Calc_screen-faded {
+  color: #9eaa74;
 }
 
 .Calc_pad {
