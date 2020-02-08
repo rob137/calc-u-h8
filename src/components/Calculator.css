@@ -67,7 +67,7 @@
     / 3fr 1fr;
 }
 
-.Calc_pad_numbers {
+.Calc_pad_nums {
   grid-area: nums;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

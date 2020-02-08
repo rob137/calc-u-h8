@@ -68,34 +68,12 @@ export default function Calculator() {
         {screen}
       </span>
       <div className="Calc_pad">
-        <div className="Calc_pad_numbers">
-          <a className="btn" onClick={handleNumClick}>
-            7
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            8
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            9
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            4
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            5
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            6
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            1
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            2
-          </a>
-          <a className="btn" onClick={handleNumClick}>
-            3
-          </a>
+        <div className="Calc_pad_nums">
+          {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((val, key) => (
+            <a className="btn" key={key} onClick={handleNumClick}>
+              {val}
+            </a>
+          ))}
         </div>
         <div className="Calc_pad_zero">
           <div className="empty"></div>
