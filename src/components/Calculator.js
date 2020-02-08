@@ -52,6 +52,12 @@ export default function Calculator() {
 
   return (
     <div className="Calc">
+      <div className="Calc_top">
+        <div className="Calc_top_solar"></div>
+        <header className="Calc_top_header">
+          <h1>Calc-u-h8</h1>
+        </header>
+      </div>
       <span className="Calc_screen">{screen}</span>
       <div className="Calc_pad">
         <div className="Calc_pad_numbers">
