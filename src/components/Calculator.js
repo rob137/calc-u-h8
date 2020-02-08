@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import "./Calculator.css";
 
-export default () => {
+export default function Calculator() {
   const [value, setValue] = useState("");
-  const [stack, setStack] = useState([]);
   const changeValue = evt => setValue(evt.target.value);
-  const equal = () => console.log("yay");
-  const pushStack = number => setStack([...stack, number]);
   return (
     <div className="Calc">
       <input value={value} onChange={changeValue} />
@@ -42,10 +39,10 @@ export default () => {
             <a>-</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={equal}>=</a>
+            <a>=</a>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
