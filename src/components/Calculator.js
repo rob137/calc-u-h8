@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Calculator.css";
 
 export default function Calculator() {
-  const [screen, setScreen] = useState("");
+  const [screen, setScreen] = useState("0");
   const [value, setValue] = useState("");
   const [acc, setAcc] = useState("");
   const [operator, setOperator] = useState("");
@@ -28,7 +28,7 @@ export default function Calculator() {
 
   function handleAcClick() {
     setValue("");
-    setScreen("");
+    setScreen("0");
     setAcc("");
     setOperator("");
   }
