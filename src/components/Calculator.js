@@ -33,7 +33,7 @@ export default function Calculator() {
     setOperator("");
   }
 
-  function handleEqClick() {
+  function applyEquals() {
     let newAcc = acc;
     if (operator === "+") {
       newAcc = String(Number(acc) + Number(value));
@@ -46,17 +46,11 @@ export default function Calculator() {
     setAcc(newAcc);
   }
 
-  function handleAddClick() {
-    setOperator("+");
+  function handleOpClick(e) {
+    setOperator(e.target.innerText);
     setValue("");
   }
 
-  function handleMinusClick() {
-    setOperator("-");
-    setValue("");
-  }
-
-  console.log(acc, operator, value);
   return (
     <div className="Calc">
       <span>{screen}</span>
@@ -86,13 +80,13 @@ export default function Calculator() {
             <a onClick={handleAcClick}>AC</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={handleAddClick}>+</a>
+            <a onClick={handleOpClick}>+</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={handleMinusClick}>-</a>
+            <a onClick={handleOpClick}>-</a>
           </div>
           <div className="Calc-Row">
-            <a onClick={handleEqClick}>=</a>
+            <a onClick={applyEquals}>=</a>
           </div>
         </div>
       </div>
