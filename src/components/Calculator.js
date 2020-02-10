@@ -76,6 +76,9 @@ export default function Calculator() {
   }
 
   function handleOpInput(input) {
+    if (acc === "") {
+      setAcc(screen);
+    }
     setOperator(input);
     setValue("");
   }
