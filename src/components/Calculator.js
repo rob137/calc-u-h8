@@ -8,32 +8,27 @@ export default function Calculator() {
   const [acc, setAcc] = useState("");
   const [operator, setOperator] = useState("");
   const [faded, setFaded] = useState(false);
-  const [lastKey, setLastKey] = useState("");
-
-  function handleKeyPress(e) {
-    const numKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    const eqKeys = ["=", "Enter", " "];
-    const opKeys = ["+", "-"];
-    const acKeys = ["Delete", "Backspace"];
-    const acceptedKeys = [...numKeys, ...eqKeys, ...opKeys, ...acKeys];
-    if (acceptedKeys.includes(e.key)) setLastKey(e.key);
-    if (numKeys.includes(e.key)) {
-      handleNumInput(e.key);
-    } else if (opKeys.includes(e.key)) {
-      handleOpInput();
-    } else if (eqKeys.includes(e.key)) {
-      applyEquals();
-    } else if (acKeys.includes(e.key)) {
-      clearAll();
-    }
-  }
 
   useEffect(() => {
+    function handleKeyPress(e) {
+      const eqKeys = ["=", "Enter", " "];
+      const opKeys = ["+", "-"];
+      const acKeys = ["Delete", "Backspace"];
+      if (!isNaN(Number(e.key))) {
+        handleNumInput(e.key);
+      } else if (opKeys.includes(e.key)) {
+        handleOpInput(e.key);
+      } else if (eqKeys.includes(e.key)) {
+        applyEquals();
+      } else if (acKeys.includes(e.key)) {
+        clearAll();
+      }
+    }
     window.addEventListener("keydown", handleKeyPress);
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [lastKey]);
+  });
 
   function handleNumInput(input) {
     // First digit at start of new sum
@@ -63,6 +58,10 @@ export default function Calculator() {
   }
 
   function applyEquals() {
+    if (acc === "" && value === "") {
+      return undefined;
+    }
+
     let newAcc = acc;
     if (operator === "+") {
       newAcc = String(Number(acc) + Number(value));
@@ -83,7 +82,6 @@ export default function Calculator() {
     setValue("");
   }
 
-  console.log(acc, operator, value, "=", screen);
   return (
     <div className="Calc">
       <div className="Calc_top">
