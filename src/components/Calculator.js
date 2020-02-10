@@ -36,20 +36,19 @@ export default function Calculator() {
   }, [lastKey]);
 
   function handleNumInput(input) {
-    // When user makes first keystroke at start of new sum
-    const isBrandNew = operator === "" && screen === "0" && acc === "";
-    if (isBrandNew) {
+    // First digit at start of new sum
+    if (value === "" && operator === "" && acc === "" && screen === "0") {
       setAcc(input);
       setScreen(input);
-      // New entry, but not first digit entered
-    } else if (operator === "" && screen !== "") {
+      // Start of new sum, but not first digit entered
+    } else if (operator === "" && value === "") {
       setAcc(acc + input);
       setScreen(acc + input);
-      // Not a new entry, but first digit entered
+      // Number after operator, but first digit entered
     } else if (operator !== "" && value === "") {
       setValue(input);
       setScreen(input);
-      // Not a new entry, not first digit entered
+      // Number after operator, not first digit entered
     } else if (operator !== "" && value !== "") {
       setValue(value + input);
       setScreen(value + input);
@@ -71,8 +70,9 @@ export default function Calculator() {
       newAcc = String(Number(acc) - Number(value));
     }
     setScreen(newAcc);
+    setValue("");
     setOperator("");
-    setAcc(newAcc);
+    setAcc("");
   }
 
   function handleOpInput(input) {
@@ -80,6 +80,7 @@ export default function Calculator() {
     setValue("");
   }
 
+  console.log(acc, operator, value, "=", screen);
   return (
     <div className="Calc">
       <div className="Calc_top">
